@@ -1,253 +1,328 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio [Nama Anda]</title>
-    <style>
-        /* ...CSS lain tetap... */
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portofolio - Muhamad Rifki</title>
+  <style>
+    /* -------- Variables & Reset -------- */
+    :root{
+      --bg: #0f1113;
+      --panel: #141517;
+      --muted: #9aa3ad;
+      --accent: #2ea6ff;
+      --accent-2: #6bd3ff;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 12px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg), #0b0b0b 60%);
+      color: #e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      scroll-behavior:smooth;
+    }
+    a{color:inherit; text-decoration:none}
 
-        .project-img {
-            width: 100%;
-            max-width: 250px;
-            display: block;
-            margin: 10px auto;
-            border-radius: 10px;
-        }
+    /* -------- Layout -------- */
+    .container{
+      max-width:1100px;
+      margin: 0 auto;
+      padding: 28px;
+    }
 
+    /* -------- NAVBAR -------- */
+    .navbar{
+      position:sticky;
+      top:0;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(20,20,22,0.7), rgba(20,20,22,0.45));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      z-index:1000;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      animation: navDown 0.6s ease;
+    }
+    .nav-inner{
+      max-width:1100px; margin:0 auto; padding:10px 20px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:0.6px;
+    }
+    .brand .dot{
+      width:10px;height:10px;border-radius:50%;background:linear-gradient(45deg,var(--accent),var(--accent-2));
+      box-shadow:0 6px 20px rgba(46,166,255,0.12), 0 0 12px rgba(107,211,255,0.06);
+    }
+    .nav-links{
+      display:flex; gap:22px; align-items:center;
+    }
+    .nav-links a{
+      color:var(--muted);
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:8px;
+      transition: all .25s ease;
+      font-size:0.98rem;
+    }
+    .nav-links a:hover{ color:var(--accent-2); transform:translateY(-3px); }
 
-        /* ==== GLOBAL RESPONSIVE ==== */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2em;
-            }
+    @keyframes navDown{
+      from{ transform:translateY(-18px); opacity:0 }
+      to{ transform:translateY(0); opacity:1 }
+    }
 
-            header p {
-                font-size: 1em;
-            }
+    /* -------- HERO / HEADER -------- */
+    header.hero{
+      text-align:center;
+      padding:60px 20px 34px;
+      margin-bottom:26px;
+    }
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      padding:36px;
+      border-radius:18px;
+      display:inline-block;
+      width:100%;
+      max-width:860px;
+      position:relative;
+      overflow:visible;
+    }
 
-            section {
-                margin: 15px;
-                padding: 15px;
-            }
+    /* profile */
+    .profile-wrap{ display:flex; flex-direction:column; align-items:center; gap:14px }
+    .profile-pic{
+      width:150px; height:150px; border-radius:50%;
+      object-fit:cover; border:4px solid rgba(255,255,255,0.06);
+      box-shadow: 0 6px 30px rgba(46,166,255,0.06), 0 6px 30px rgba(0,0,0,0.8) inset;
+      transition: transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .45s;
+      animation: float 4s ease-in-out infinite;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
+    .profile-pic:hover{ transform: translateY(-6px) scale(1.04); box-shadow: 0 18px 50px rgba(46,166,255,0.12); }
 
-            .project-img {
-                max-width: 200px;
-                /* kecilkan otomatis di device kecil */
-            }
-        }
+    @keyframes float{
+      0%{ transform:translateY(0) }
+      50%{ transform:translateY(-12px) }
+      100%{ transform:translateY(0) }
+    }
 
-        /* ==== HP KECIL (≤ 480px) ==== */
-        @media (max-width: 480px) {
-            header {
-                padding: 35px 15px;
-            }
+    /* titles */
+    .title{
+      margin-top:6px;
+    }
+    .title h1{
+      font-size:2.3rem;
+      letter-spacing: -0.6px;
+      color:#ffffff;
+      margin-bottom:6px;
+    }
+    .subtitle{
+      color:var(--muted);
+      font-weight:600;
+      font-size:0.98rem;
+    }
 
-            header h1 {
-                font-size: 1.8em;
-            }
+    /* typing name (centered & measured) */
+    .name-typing{
+      display:inline-block;
+      margin-top:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      border-right:3px solid rgba(255,255,255,0.9);
+      font-weight:700;
+      font-size:1.25rem;
+      letter-spacing:0.2px;
+      color:var(--accent-2);
+      animation:
+        typing 2.2s steps(16) forwards,
+        blink .6s step-end infinite;
+      width:0;
+    }
+    @keyframes typing{
+      from{ width:0 }
+      to{ width:16ch } /* pas untuk nama sekitar 12-16 karakter; sesuaikan jika perlu */
+    }
+    @keyframes blink{ 50%{ border-color: transparent } }
 
-            .profile-pic {
-                width: 110px;
-                height: 110px;
-            }
+    /* -------- MAIN CONTENT (cards) -------- */
+    main{ padding: 18px 0 80px; }
+    .grid{
+      display:grid; grid-template-columns: 1fr 360px; gap:26px; align-items:start;
+    }
 
-            section {
-                margin: 10px;
-                padding: 12px;
-            }
+    /* left column: sections */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding:22px;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      margin-bottom:18px;
+      animation: cardIn .7s ease both;
+    }
+    @keyframes cardIn{ from{ transform:translateY(10px); opacity:0 } to{ transform:translateY(0); opacity:1 } }
 
-            h2 {
-                font-size: 1.3em;
-            }
+    h2.section-title{
+      color:var(--accent);
+      margin-bottom:12px;
+      font-size:1.15rem;
+      display:flex; align-items:center; gap:10px;
+    }
+    .biodata-list{ list-style: none; padding-left:0; color:var(--muted); }
+    .biodata-list li{ padding:8px 0; border-bottom:1px dashed rgba(255,255,255,0.02); font-weight:600; }
+    .biodata-list li strong{ color:#fff; font-weight:800; margin-right:6px; font-size:0.95rem }
 
-            ul li {
-                font-size: 0.95em;
-            }
+    /* right column: sidebar */
+    .sidebar{ position:sticky; top:92px; align-self:start; }
+    .skills{
+      display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;
+    }
+    .skill{
+      background:var(--glass); border:1px solid rgba(255,255,255,0.03);
+      padding:8px 12px; border-radius:999px; color:var(--muted); font-weight:700; font-size:0.9rem;
+      transition:transform .25s; cursor:default;
+    }
+    .skill:hover{ transform:translateY(-4px); color:var(--accent-2) }
 
-            .project-img {
-                max-width: 160px;
-            }
-        }
+    /* project cards */
+    .projects-grid{ display:grid; gap:14px; margin-top:8px }
+    .project-item{
+      display:flex; gap:14px; align-items:flex-start; background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));
+      border-radius:12px; padding:12px; border:1px solid rgba(255,255,255,0.03); transition: transform .3s, box-shadow .3s;
+    }
+    .project-item:hover{ transform:translateY(-8px); box-shadow: 0 18px 40px rgba(2,6,23,0.65) }
+    .project-item img{ width:76px; height:56px; object-fit:cover; border-radius:8px; flex-shrink:0; border:1px solid rgba(255,255,255,0.03) }
+    .project-item .pmeta{ color:var(--muted); font-size:0.92rem; }
+    .project-item .pmeta strong{ color:#fff; display:block; font-weight:800; margin-bottom:6px }
 
+    /* footer */
+    footer.sitefoot{ text-align:center; color:var(--muted); padding:36px 0 80px; font-size:0.92rem }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-        }
+    /* small screens */
+    @media (max-width:900px){
+      .grid{ grid-template-columns: 1fr; }
+      .sidebar{ position:relative; top:auto; }
+      .nav-links{ display:none } /* simple mobile */
+      .nav-inner{ justify-content:center }
+      .brand{ gap:8px }
+      .hero-card{ padding:24px }
+    }
+    @media (max-width:480px){
+      .profile-pic{ width:120px; height:120px }
+      .title h1{ font-size:1.6rem }
+      .name-typing{ font-size:1rem; }
+      .nav-inner{ padding:8px 12px }
+    }
 
-        header {
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-            padding: 50px 20px;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-
-        header p {
-            font-size: 1.2em;
-            margin: 10px 0;
-        }
-
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid white;
-            margin: 20px auto;
-            display: block;
-            object-fit: cover;
-        }
-
-        section {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            animation: slideInLeft 1s ease-out;
-        }
-
-        h2 {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 5px;
-        }
-
-        ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-
-        .project {
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .project:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #007bff;
-            color: white;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            section {
-                margin: 10px;
-                padding: 15px;
-            }
-
-            .profile-pic {
-                width: 120px;
-                height: 120px;
-            }
-        }
-    </style>
+    /* accessibility focus */
+    a:focus{ outline: 3px solid rgba(46,166,255,0.18); outline-offset:3px; border-radius:6px }
+  </style>
 </head>
-
 <body>
-    <header>
-        <img src="aku.jpg" alt="Foto Profil" class="profile-pic">
-        <h1>Portofolio</h1>
+  <!-- NAV -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <div class="brand" aria-hidden="true">
+        <span class="dot"></span>
+        <span style="color:#eaf6ff">Rifki</span>
+      </div>
 
-        <h1> Muhamad Rifki </h1>
-    </header>
+      <div class="nav-links" role="menu">
+        <a href="#biodata">Biodata</a>
+        <a href="#pengalaman">Pengalaman</a>
+        <a href="#proyek">Proyek</a>
+      </div>
+    </div>
+  </nav>
 
-    <section id="biodata">
-        <h2>Biodata Diri</h2>
-        <ul>
-            <li><strong>JENIS KELAMIN: </strong> LAKI-LAKI</li>
-            <li><strong>TANGGAL LAHIR: </strong> 17-05-2010</li>
-            <li><strong>Pendidikan: </strong> CITRA NEGARA</li>
-            <li><strong>HOBI: </strong> BASKET, MANCING TIPIS-TIPIS</li>
-        </ul>
-    </section>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-card container">
+      <div class="profile-wrap">
+        <img src="aku.jpg" alt="Foto Muhamad Rifki" class="profile-pic" />
 
-    <section id="pengalaman">
-        <h2>Pengalaman dan skill</h2>
-        <ul>
-            <li><strong>Skill</strong>
-            HTML,CSS,PHP.</li>
-            <li><strong>2025</strong> <br>
-                saya semenjak sekolah di cn pengalam saya belajar html, css, dan php.<br>
-            </li>
-            <li><strong> Membuat Kodok</strong><br>
-                Saya pernah di tugaskan pada oktober untuk membuat kodok</li>
-            <li><strong> Membuat projek proposal</strong><br>
-                saya pernah belajar html dan css sendiri pada smp </li>
-        </ul>
-    </section>
-
-    <section id="proyek">
-        <h2>Proyek</h2>
-        <div class="project">
-            <h3>Projek 1, Membuat Register Tokopedia</h3>
-            <img src="tokped.jpg" alt="Screenshot Proyek 1" class="project-img">
-            <p><strong>Deskripsi:</strong> Saat itu Saya di tugaskan untuk membuat register Tokopedia</p>
-            <p><strong>Teknologi:</strong> HTML, CSS, JavaScript</p>
+        <div class="title">
+          <h1>Portofolio</h1>
+          <div class="subtitle">Pelajar & Pengembang Frontend Pemula</div>
         </div>
-        <div class="project">
-            <h3>Projek 2, Membuat kodok</h3>
-            <img src="kodok.jpg" alt="Screenshot Proyek 1" class="project-img">
-            <p><strong>Deskripsi:</strong> saat bulan oktober saya di tugaskan untuk membuat kodok</p>
-            <p><strong>Teknologi:</strong> HTML, CSS,</p>
 
+        <div class="name-typing" aria-hidden="true">Muhamad Rifki</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container">
+    <div class="grid">
+      <!-- LEFT: content sections -->
+      <div>
+        <section id="biodata" class="card" aria-labelledby="bioTitle">
+          <h2 id="bioTitle" class="section-title">Biodata Diri</h2>
+          <ul class="biodata-list">
+            <li><strong>Jenis Kelamin:</strong> LAKI-LAKI</li>
+            <li><strong>Tanggal Lahir:</strong> 17-05-2010</li>
+            <li><strong>Pendidikan:</strong> CITRA NEGARA</li>
+            <li><strong>Hobi:</strong> Basket, Mancing</li>
+          </ul>
+        </section>
+
+        <section id="pengalaman" class="card" aria-labelledby="expTitle">
+          <h2 id="expTitle" class="section-title">Pengalaman & Skill</h2>
+          <p style="color:var(--muted); margin-bottom:10px; font-weight:600;">
+            Sejak 2025 aktif belajar HTML, CSS, dan PHP. Pernah membuat beberapa tugas dan project sederhana.
+          </p>
+
+          <div class="projects-grid">
+            <div class="project-item">
+              <img src="tokped.jpg" alt="Register Tokopedia" />
+              <div class="pmeta"><strong>Register Tokopedia</strong><span>HTML / CSS / JS</span></div>
+            </div>
+
+            <div class="project-item">
+              <img src="kodok.jpg" alt="Membuat Kodok" />
+              <div class="pmeta"><strong>Membuat Kodok</strong><span>HTML / CSS</span></div>
+            </div>
+
+            <div class="project-item">
+              <img src="Screenshot 2025-12-11 175933.png" alt="Portofolio" />
+              <div class="pmeta"><strong>Portofolio</strong><span>HTML / CSS / JS</span></div>
+            </div>
+
+            <div class="project-item">
+              <img src="gundam.jpg" alt="Gundam" />
+              <div class="pmeta"><strong>Gundam</strong><span>HTML / CSS / JS</span></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT: sidebar -->
+      <aside class="sidebar">
+        <div class="card" aria-labelledby="skillTitle">
+          <h3 id="skillTitle" class="section-title">Skill</h3>
+          <div class="skills" aria-hidden="false">
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">PHP</span>
+            <span class="skill">JavaScript</span>
+          </div>
         </div>
-        <div class="project">
-            <h3>Projek 3, Membuat Portofolio</h3>
-            <img src="Screenshot 2025-12-11 175933.png" alt="Screenshot Proyek 1" class="project-img">
-            <p><strong>Deskripsi:</strong> Saat uprak di tugaskan untuk mambuatkan Portofolio di situ saya membuat 2
-                Portofolio</p>
-            <p><strong>Teknologi:</strong> HTML, CSS, JavaScript</p>
 
+        <div class="card" style="margin-top:16px;">
+          <h3 class="section-title">Kontak</h3>
+          <p style="color:var(--muted); font-weight:600">Instagram: <span style="color:#fff">@ig.eeeeee.Rifki</span></p>
         </div>
-    </section>
+      </aside>
+    </div>
+  </main>
 
-    <footer>
-        <p>&copy; ig.eeeeee.Rifki </p>
-    </footer>
+  <footer class="sitefoot">
+    &copy; 2025 Muhamad Rifki — dibuat dengan ❤️
+  </footer>
 </body>
-
 </html>
